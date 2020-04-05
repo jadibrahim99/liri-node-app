@@ -34,7 +34,7 @@ switch (search) {
         for (var i = 0; i < response.data.length; i++) {
           var datetime = response.data[i].datetime; 
           var results = 
-          "--------------------------------------------------------------------" +
+          "\n------------------------------------------------------------\n\n" +
               "\nVenue Name: " + response.data[i].venue.name + 
               "\nVenue Location: " + response.data[i].venue.city +
               "\nDate of the Event: " + moment(datetime, "YYYY-MM-DD").format("MM/DD/YYYY")
@@ -49,5 +49,38 @@ switch (search) {
   console.log(error);
   });
         }
-  
+        function spotifySong(term) {
+           if(!term){
+               term = "Carry on my Wayward Son";
+           }
+           spotify.search({type:"track", query:"value"}).then(function(response){
+            for(var i=0;i=5;i++){
+                var spotifyResults = 
+                "\nArtist(s): " + response.tracks.items[i].artists[0].name + 
+                "\nSong Name: " + response.tracks.items[i].name + 
+                "\nAlbum Name: " + response.tracks.items[i].album.name +
+                "\nPreview Link " + response.tracks.items[i].preview_url;
+                console.log(spotifyResults);
+            }
+            fs.appendFile("random.txt", spotifyResults + divider, function(err) {
+                if (err) throw err;
+                console.log(spotifyResults);
+              });
+              })
+              .catch(function (error) {
+              console.log(error);
+            
+           
+           });
+        }
+
+
+
+
+
+
+
+         
+          
+        
   

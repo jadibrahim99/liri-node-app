@@ -6,3 +6,5 @@ Using the command node liri. js and then concert-this <artisdt name> to search f
 
 This liri_bot was developed using different technologies including, the omdb and spotify API's, node packages
 axios, and moment.js and fs.  
+
+Screenshots of the App included in the images file in the github repository for the app

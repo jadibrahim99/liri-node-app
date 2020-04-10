@@ -20,12 +20,10 @@ switch (search) {
     case "spotify-this-song":
       spotifySong(term);
       break;
-    case "movieThis":
-      movieThis(term);
+    case "movie-this":
+      movieGet(term);
       break;
-    case "do-what-it-says":
-      doThis(term);
-      break;
+
   }
   // Function that loops through bandsintown API and pulls Name, Date, Time, and Location of event
   function concertThis(term) {
@@ -75,12 +73,31 @@ switch (search) {
         }
 
 
-
-
-
-
-
+        function movieGet(term) {
+          if(!term){
+            term = "Mr. Nobody";
+          }
+          axios.get("https://www.omdbapi.com/?t=" + term + 
+          "&y=&plot=short&apikey=trilogy").then(function(response){
+            var movieResponse = 
+            "\nMovie Title: " + response.data.Title + 
+            "\nYear of Release: " + response.data.Year +
+            "\nIMDB Rating: " + response.data.imdbRating +
+            "\nRotten Tomatoes Rating: " + response.data.Rating[1].term +
+            "\nCountry Produced: " + response.data.Country +
+            "\nLanguage: " + response.data.Language +
+            "\nPlot: " + response.data.Plot + 
+            "\nActors/Actresses: " + response.data.Actors;
+            console.log(movieResponse);
          
-          
+          fs.appendFile("random.txt", movieResponse + divider, function(err) {
+            if (err) throw err;
+            console.log(movieResponse);
+          });
+          })
+          .catch(function (error) {
+          console.log(error);
         
-  
+       
+       });
+      }
